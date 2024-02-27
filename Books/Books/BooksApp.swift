@@ -2,7 +2,7 @@
 //  BooksApp.swift
 //  Books
 //
-//  Created by Luana Chen (Contractor) on 27/02/24.
+//  Created by Luana Chen on 27/02/24.
 //
 
 import SwiftUI

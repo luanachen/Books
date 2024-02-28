@@ -14,7 +14,7 @@ struct BooksListView: View {
         NavigationView {
             List(viewModel.books) { book in
                 NavigationLink(destination: BookDetailView(book: book)) {
-                    bookItem(book: book)
+                    itemView(book: book)
                 }
             }
             .id("book_list_view")
@@ -23,11 +23,14 @@ struct BooksListView: View {
                 viewModel.fetchBooks()
             }
         }
+        .onAppear {
+            viewModel.fetchBooks()
+        }
     }
 }
 
 extension BooksListView {
-    func bookItem(book: Book) -> some View {
+    func itemView(book: Book) -> some View {
         VStack(alignment: .leading) {
             Text(book.displayedName)
                 .font(.headline)

@@ -7,18 +7,15 @@
 
 import Foundation
 
-// MARK: - Books
 struct Books: Codable {
     let books: [Book]
     let success: Bool
     
-    enum Coding: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case books = "payload"
         case success
     }
 }
-
-// MARK: - Book
 
 struct Book: Codable, Identifiable {
     let id = UUID()
@@ -30,43 +27,9 @@ struct Book: Codable, Identifiable {
     let maximumAmount: String
     let maximumValue: String
     let minimumAmount: String
-    let locale: Locale = Locale.current
     let tickSize: String
-}
-
-// MARK: - DefaultChart
-
-extension Book {
-    enum DefaultChart: String, Codable {
-        case candle = "candle"
-        case depth = "depth"
-        case tradingview = "tradingview"
-    }
-}
-
-// MARK: - FlatRate
-
-extension Book {
-    struct FlatRate: Codable {
-        let maker: String
-        let taker: String
-    }
-}
-
-
-// MARK: - Structure
-
-extension Book {
-    struct Structure: Codable {
-        let volume: String
-        let maker: String
-        let taker: String
-    }
-}
-
-// MARK: - CodingKeys
-
-extension Book {
+    let locale: Locale = Locale.current
+    
     enum CodingKeys: String, CodingKey {
         case defaultChart = "default_chart"
         case minimumPrice = "minimum_price"
@@ -77,6 +40,26 @@ extension Book {
         case maximumValue = "maximum_value"
         case minimumAmount = "minimum_amount"
         case tickSize = "tick_size"
+    }
+}
+
+extension Book {
+    
+    enum DefaultChart: String, Codable {
+        case candle = "candle"
+        case depth = "depth"
+        case tradingview = "tradingview"
+    }
+    
+    struct FlatRate: Codable {
+        let maker: String
+        let taker: String
+    }
+    
+    struct Structure: Codable {
+        let volume: String
+        let maker: String
+        let taker: String
     }
 }
 
@@ -104,7 +87,6 @@ extension Book {
         let maxFormatted = formatter.string(from: NSNumber(value: maxValue)) ?? ""
         return "\(minFormatted) - \(maxFormatted)"
     }
-
 }
 
 #if DEBUG

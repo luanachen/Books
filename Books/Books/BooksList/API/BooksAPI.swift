@@ -9,6 +9,7 @@ import Foundation
 
 enum BooksAPI {
     case getBooksList
+    case getBookDetail(String)
 }
 
 extension BooksAPI: APIRequestConfiguration {
@@ -17,12 +18,14 @@ extension BooksAPI: APIRequestConfiguration {
         switch self {
         case .getBooksList:
             return "/v3/available_books/"
+        case .getBookDetail:
+            return "/v3/ticker/"
         }
     }
     
     var method: APIRequestHTTPMethod {
         switch self {
-        case .getBooksList:
+        case .getBooksList, .getBookDetail:
             return .get
         }
     }
@@ -31,12 +34,14 @@ extension BooksAPI: APIRequestConfiguration {
         switch self {
         case .getBooksList:
             return nil
+        case let .getBookDetail(book):
+            return ["book": book]
         }
     }
     
     var headers: APIRequestHeaders? {
         switch self {
-        case .getBooksList:
+        case .getBooksList, .getBookDetail:
             return nil
         }
     }

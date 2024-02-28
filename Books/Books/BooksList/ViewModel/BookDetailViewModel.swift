@@ -1,30 +1,32 @@
 //
-//  BooksListViewModel.swift
+//  BookDetailViewModel.swift
 //  Books
 //
-//  Created by Luana Chen on 27/02/24.
+//  Created by Luana Chen (Contractor) on 28/02/24.
 //
 
 import Combine
 import Foundation
 
-class BooksListViewModel: ObservableObject {
+class BookDetailViewModel: ObservableObject {
     
     struct Environment {
         var client: BooksClient = .live()
     }
     
-    @Published var books: [Book] = []
+    @Published var bookDetail: BookDetail.Payload?
     
+    private let book: String
     private let env: Environment
     private var cancellables = Set<AnyCancellable>()
     
-    init(env: Environment = .init()) {
+    init(book: String, env: Environment = .init()) {
+        self.book = book
         self.env = env
     }
     
-    func fetchBookList() async throws {
-        env.client.getBookList()
+    func fetchBookDetail() async throws {
+        env.client.getBookDetail(book: book)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -35,8 +37,8 @@ class BooksListViewModel: ObservableObject {
                     // TODO: handle error
                     print("error")
                 }
-            }, receiveValue: { [weak self] books in
-                self?.books = books
+            }, receiveValue: { [weak self] bookDetail in
+                self?.bookDetail = bookDetail
             })
             .store(in: &cancellables)
     }

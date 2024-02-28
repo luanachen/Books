@@ -13,18 +13,20 @@ struct BooksListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.books) { book in
-                NavigationLink(destination: BookDetailView(book: book)) {
+                NavigationLink(destination: BookDetailView(viewModel: .init(book: book.name))) {
                     itemView(book: book)
                 }
             }
             .id("book_list_view")
             .navigationBarTitle("Books")
             .refreshable {
-                viewModel.fetchBooks()
+                await fetchBookList()
             }
         }
         .onAppear {
-            viewModel.fetchBooks()
+            Task {
+                await fetchBookList()
+            }
         }
     }
 }
@@ -44,13 +46,22 @@ extension BooksListView {
         }
         .id("book_item_row_\(book.name)")
     }
+    
+    func fetchBookList() async {
+        do {
+            try await viewModel.fetchBookList()
+        } catch {
+            // TODO: Handle error
+            print("Error: \(error)")
+        }
+    }
 }
 
 #if DEBUG
 
 struct BooksListView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = BooksListViewModel()
+        let viewModel = BooksListViewModel(env: .init(client: .mock()))
         return BooksListView(viewModel: viewModel)
     }
 }

@@ -20,7 +20,7 @@ public class NetworkManager: RESTNetworkingProtocol {
     }
 
     func request<T: Decodable>(request: APIRequestConfiguration, completion: @escaping (Result<T, Error>) -> Void) {
-        guard let url = getUrl(path: request.path) else {
+        guard let url = getUrl(request: request) else {
             completion(.failure(NetworkError.invalidURL))
             return
         }
@@ -53,8 +53,14 @@ public class NetworkManager: RESTNetworkingProtocol {
         }.resume()
     }
     
-    func getUrl(path: String) -> URL? {
-        guard !path.isEmpty else { return domainUrl }
-        return domainUrl.appendingPathComponent(path)
+    func getUrl(request: APIRequestConfiguration) -> URL? {
+        var components = URLComponents(url: domainUrl.appendingPathComponent(request.path), resolvingAgainstBaseURL: true)
+        
+        // Check if parameters exist and are of the expected type
+        if let parameters = request.parameters as? [String: String] {
+            components?.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        }
+        
+        return components?.url
     }
 }

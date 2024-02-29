@@ -11,6 +11,7 @@ struct BooksListView: View {
 
     @ObservedObject var viewModel = BooksListViewModel()
     @State private var showErrorToast = false
+    @State private var timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationView {
@@ -33,19 +34,30 @@ struct BooksListView: View {
             }
         }
         .alert(isPresented: $showErrorToast) {
-            Alert(title: Text("Error"),
-                  message: Text("Failed to fetch book list"),
-                  primaryButton: .default(Text("Try Again")) {
-                Task {
-                    await fetchData()
-                }
-            }, secondaryButton: .cancel())
+            alertView()
         }
         .onReceive(viewModel.$error) { error in
-            showErrorToast = error != nil
+            if error != nil {
+                showErrorToast = true
+            }
+        }
+        .onReceive(timer) { _ in
+            Task {
+                await fetchData()
+            }
         }
     }
 }
+
+// MARK: Methods
+
+private extension BooksListView {
+    func fetchData() async {
+        await viewModel.fetchData()
+    }
+}
+
+// MARK: SubViews
 
 private extension BooksListView {
     func itemView(book: Book) -> some View {
@@ -66,8 +78,14 @@ private extension BooksListView {
         .id("book_item_row_\(book.name)")
     }
     
-    func fetchData() async {
-        await viewModel.fetchData()
+    func alertView() -> Alert {
+        Alert(title: Text("Error"),
+              message: Text("Failed to fetch book list"),
+              primaryButton: .default(Text("Try Again")) {
+            Task {
+                await fetchData()
+            }
+        }, secondaryButton: .cancel())
     }
 }
 

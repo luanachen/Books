@@ -48,7 +48,18 @@ struct BookDetailView: View {
        }
 }
 
-extension BookDetailView {
+// MARK: Methods
+
+private extension BookDetailView {
+    
+    func fetchData() async {
+        await viewModel.fetchData()
+    }
+}
+
+// MARK: Subviews
+
+private extension BookDetailView {
     var bookDetailSection: some View {
         Section(header: Text("Book Details").font(.headline)) {
             VStack(alignment: .leading, spacing: 8) {
@@ -68,13 +79,6 @@ extension BookDetailView {
             }
         }
         .id("book_detail_trading_view")
-    }
-}
-
-extension BookDetailView {
-    
-    func fetchData() async {
-        await viewModel.fetchData()
     }
 }
 

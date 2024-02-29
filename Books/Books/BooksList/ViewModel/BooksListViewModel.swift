@@ -17,6 +17,9 @@ class BooksListViewModel: ObservableObject {
     @Published var books: [Book] = []
     @Published var error: Error?
     
+    // For testing refresh behavior
+    var count: Int = 0
+    
     private let env: Environment
     private var cancellables = Set<AnyCancellable>()
     
@@ -30,8 +33,8 @@ class BooksListViewModel: ObservableObject {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
-                    // TODO: finish loading
-                    print("success")
+                    self?.count += 1
+                    print("success fetch count: \(String(describing: self?.count))")
                 case .failure(let error):
                     self?.error = error
                 }

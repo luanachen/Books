@@ -1,18 +1,18 @@
 //
-//  BookListViewModel.swift
+//  BookDetailViewModelTests.swift
 //  BooksTests
 //
-//  Created by Luana Chen (Contractor) on 27/02/24.
+//  Created by Luana Chen (Contractor) on 29/02/24.
 //
 
 import XCTest
 @testable import Books
 
-final class BooksListViewModelTests: XCTestCase {
-    var sut: BooksListViewModel!
-    
+final class BookDetailViewModelTests: XCTestCase {
+    var sut: BookDetailViewModel!
+
     override func setUp() async throws {
-        sut = BooksListViewModel(env: .init(client: .mock()))
+        sut = BookDetailViewModel(book: "Book", env: .init(client: .mock()))
     }
 
     override func tearDownWithError() throws {
@@ -20,7 +20,6 @@ final class BooksListViewModelTests: XCTestCase {
     }
 
     func testFetchData() async {
-        let expectedBooks = [Book.mock(), Book.mock(name: "eth_mxn")]
         let expectation = XCTestExpectation(description: "Fetch data")
         Task {
             await sut.fetchData()
@@ -28,6 +27,6 @@ final class BooksListViewModelTests: XCTestCase {
         }
         
         await fulfillment(of: [expectation], timeout: 2)
-        XCTAssertEqual(sut.books, expectedBooks)
+        XCTAssertNotNil(sut.bookDetail)
     }
 }

@@ -15,6 +15,7 @@ class BookDetailViewModel: ObservableObject {
     }
     
     @Published var bookDetail: BookDetail.Payload?
+    @Published var error: Error?
     
     var displayedName: String {
         bookDetail?.displayedName ?? ""
@@ -49,17 +50,16 @@ class BookDetailViewModel: ObservableObject {
         self.env = env
     }
     
-    func fetchBookDetail() async throws {
+    func fetchData() async {
         env.client.getBookDetail(book: book)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     // TODO: finish loading
                     print("success")
                 case .failure(let error):
-                    // TODO: handle error
-                    print("error")
+                    self?.error = error
                 }
             }, receiveValue: { [weak self] bookDetail in
                 self?.bookDetail = bookDetail

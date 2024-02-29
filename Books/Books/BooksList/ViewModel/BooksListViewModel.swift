@@ -15,6 +15,7 @@ class BooksListViewModel: ObservableObject {
     }
     
     @Published var books: [Book] = []
+    @Published var error: Error?
     
     private let env: Environment
     private var cancellables = Set<AnyCancellable>()
@@ -23,17 +24,16 @@ class BooksListViewModel: ObservableObject {
         self.env = env
     }
     
-    func fetchBookList() async throws {
+    func fetchData() async {
         env.client.getBookList()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     // TODO: finish loading
                     print("success")
                 case .failure(let error):
-                    // TODO: handle error
-                    print("error")
+                    self?.error = error
                 }
             }, receiveValue: { [weak self] books in
                 self?.books = books

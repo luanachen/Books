@@ -8,30 +8,46 @@
 import SwiftUI
 
 struct BooksListView: View {
+
     @ObservedObject var viewModel = BooksListViewModel()
+    @State private var showErrorToast = false
     
     var body: some View {
         NavigationView {
-            List(viewModel.books) { book in
-                NavigationLink(destination: BookDetailView(viewModel: .init(book: book.name))) {
-                    itemView(book: book)
+            List {
+                ForEach (viewModel.books, id: \.self) { book in
+                    NavigationLink(destination: BookDetailView(viewModel: .init(book: book.name))) {
+                        itemView(book: book)
+                    }
                 }
             }
             .id("book_list_view")
             .navigationBarTitle("Books")
             .refreshable {
-                await fetchBookList()
+                await fetchData()
             }
         }
         .onAppear {
             Task {
-                await fetchBookList()
+                await fetchData()
             }
+        }
+        .alert(isPresented: $showErrorToast) {
+            Alert(title: Text("Error"),
+                  message: Text("Failed to fetch book list"),
+                  primaryButton: .default(Text("Try Again")) {
+                Task {
+                    await fetchData()
+                }
+            }, secondaryButton: .cancel())
+        }
+        .onReceive(viewModel.$error) { error in
+            showErrorToast = error != nil
         }
     }
 }
 
-extension BooksListView {
+private extension BooksListView {
     func itemView(book: Book) -> some View {
         VStack(alignment: .leading) {
             Text(book.displayedName)
@@ -50,13 +66,8 @@ extension BooksListView {
         .id("book_item_row_\(book.name)")
     }
     
-    func fetchBookList() async {
-        do {
-            try await viewModel.fetchBookList()
-        } catch {
-            // TODO: Handle error
-            print("Error: \(error)")
-        }
+    func fetchData() async {
+        await viewModel.fetchData()
     }
 }
 

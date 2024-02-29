@@ -17,8 +17,7 @@ struct Books: Codable {
     }
 }
 
-struct Book: Codable, Identifiable {
-    let id = UUID()
+struct Book: Codable, Equatable, Hashable {
     let defaultChart: DefaultChart
     let minimumPrice: String
     let maximumPrice: String
@@ -28,7 +27,18 @@ struct Book: Codable, Identifiable {
     let maximumValue: String
     let minimumAmount: String
     let tickSize: String
-    let locale: Locale = Locale.current
+    
+    init(defaultChart: DefaultChart, minimumPrice: String, maximumPrice: String, name: String, minimumValue: String, maximumAmount: String, maximumValue: String, minimumAmount: String, tickSize: String) {
+        self.defaultChart = defaultChart
+        self.minimumPrice = minimumPrice
+        self.maximumPrice = maximumPrice
+        self.name = name
+        self.minimumValue = minimumValue
+        self.maximumAmount = maximumAmount
+        self.maximumValue = maximumValue
+        self.minimumAmount = minimumAmount
+        self.tickSize = tickSize
+    }
     
     enum CodingKeys: String, CodingKey {
         case defaultChart = "default_chart"

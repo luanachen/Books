@@ -19,8 +19,8 @@ final class BooksListViewModelTests: XCTestCase {
         sut = nil
     }
 
-    func testFetchBooks() throws {
-        sut.fetchBooks()
+    func testFetchBooks() async throws {
+        try await sut.fetchBookList()
         XCTAssertNotNil(sut.books)
     }
 

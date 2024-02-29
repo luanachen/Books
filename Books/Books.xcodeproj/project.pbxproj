@@ -12,6 +12,7 @@
 		2C5CFD9F2B8FCBBC006E1546 /* BooksClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFD9E2B8FCBBC006E1546 /* BooksClient.swift */; };
 		2C5CFDA12B8FEFA5006E1546 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFDA02B8FEFA5006E1546 /* BookDetailViewModel.swift */; };
 		2C5CFDA32B8FF25E006E1546 /* BookDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFDA22B8FF25E006E1546 /* BookDetail.swift */; };
+		2C5CFDA62B90D873006E1546 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFDA52B90D873006E1546 /* String+Extensions.swift */; };
 		2C5DB0712B8E32EB00327B61 /* BooksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DB0702B8E32EB00327B61 /* BooksApp.swift */; };
 		2C5DB0732B8E32EB00327B61 /* BooksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DB0722B8E32EB00327B61 /* BooksListView.swift */; };
 		2C5DB0752B8E32EC00327B61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DB0742B8E32EC00327B61 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		2C5CFD9E2B8FCBBC006E1546 /* BooksClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksClient.swift; sourceTree = "<group>"; };
 		2C5CFDA02B8FEFA5006E1546 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		2C5CFDA22B8FF25E006E1546 /* BookDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetail.swift; sourceTree = "<group>"; };
+		2C5CFDA52B90D873006E1546 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		2C5DB06D2B8E32EB00327B61 /* Books.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Books.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5DB0702B8E32EB00327B61 /* BooksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksApp.swift; sourceTree = "<group>"; };
 		2C5DB0722B8E32EB00327B61 /* BooksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		2C5CFDA42B8FF7D1006E1546 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C5CFDA52B90D873006E1546 /* String+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				2C5DB0732B8E32EB00327B61 /* BooksListView.swift in Sources */,
 				2C5DB0712B8E32EB00327B61 /* BooksApp.swift in Sources */,
 				2C5DB0B62B8E78ED00327B61 /* RESTNetworking.swift in Sources */,
+				2C5CFDA62B90D873006E1546 /* String+Extensions.swift in Sources */,
 				2C5DB0B82B8E7B5C00327B61 /* NetworkError.swift in Sources */,
 				2C5CFD9F2B8FCBBC006E1546 /* BooksClient.swift in Sources */,
 				2C5DB0B22B8E768200327B61 /* APIRequestConfiguration.swift in Sources */,

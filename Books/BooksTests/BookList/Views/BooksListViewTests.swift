@@ -36,6 +36,15 @@ final class BooksListViewTests: XCTestCase {
         
         let value2 = try? sut.inspect().find(viewWithId: "book_item_row_eth_mxn")
         XCTAssertNotNil(value2, "cannot be nil")
+        
+        let value3 = try? sut.inspect().find(viewWithId: "book_name_item_view")
+        XCTAssertNotNil(value3, "cannot be nil")
+        
+        let value4 = try? sut.inspect().find(viewWithId: "maximum_price_item_view")
+        XCTAssertNotNil(value4, "cannot be nil")
+        
+        let value5 = try? sut.inspect().find(viewWithId: "price_range_item_view")
+        XCTAssertNotNil(value5, "cannot be nil")
     }
 
 }

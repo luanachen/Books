@@ -67,24 +67,16 @@ extension Book {
 
 extension Book {
     var displayedName: String {
-        return name.replacingOccurrences(of: "_", with: " ").uppercased()
+        name.replacingOccurrences(of: "_", with: " ").uppercased()
     }
     
     var formattedMaximumPrice: String {
-        guard let priceDouble = Double(maximumPrice) else { return "" }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = locale
-        return formatter.string(from: NSNumber(value: priceDouble)) ?? ""
+        maximumPrice.formattedPrice()
     }
     
     var formattedPriceRange: String {
-        guard let minValue = Double(minimumPrice), let maxValue = Double(maximumPrice) else { return "" }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = locale
-        let minFormatted = formatter.string(from: NSNumber(value: minValue)) ?? ""
-        let maxFormatted = formatter.string(from: NSNumber(value: maxValue)) ?? ""
+        let minFormatted = minimumPrice.formattedPrice()
+        let maxFormatted = maximumPrice.formattedPrice()
         return "\(minFormatted) - \(maxFormatted)"
     }
 }

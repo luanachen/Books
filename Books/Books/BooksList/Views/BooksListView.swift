@@ -36,13 +36,16 @@ extension BooksListView {
         VStack(alignment: .leading) {
             Text(book.displayedName)
                 .font(.headline)
+                .id("book_name_item_view")
             
             Text("Maximum Price: \(book.formattedMaximumPrice)")
                 .foregroundColor(Color.blue)
+                .id("maximum_price_item_view")
             
             Text("Price Range: \(book.formattedPriceRange)")
                 .font(.subheadline)
                 .foregroundColor(Color.gray)
+                .id("price_range_item_view")
         }
         .id("book_item_row_\(book.name)")
     }

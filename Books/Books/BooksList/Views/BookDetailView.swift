@@ -17,34 +17,45 @@ struct BookDetailView: View {
         
     var body: some View {
            VStack(alignment: .leading, spacing: 20) {
-               Section(header: Text("Book Details").font(.headline)) {
-                   VStack(alignment: .leading, spacing: 8) {
-                       Text("Volume: \(formattedAmount(viewModel.bookDetail?.volume ?? ""))")
-                       Text("High: \(formattedCurrency(viewModel.bookDetail?.high ?? ""))")
-                       Text("Change 24h: \(formattedCurrency(viewModel.bookDetail?.change24 ?? ""))")
-                   }
-               }
+               bookDetailSection
                
                Divider()
                
-               Section(header: Text("Trading Information").font(.headline)) {
-                   VStack(alignment: .leading, spacing: 8) {
-                       Text("Ask: \(formattedCurrency(viewModel.bookDetail?.ask ?? ""))")
-                       Text("Bid: \(formattedCurrency(viewModel.bookDetail?.bid ?? ""))")
-                   }
-               }
+               tradingInfoSection
                
                Spacer()
            }
            .padding()
-            // TODO: Add displayname, handle in viewModel
-           .navigationBarTitle(viewModel.bookDetail?.book ?? "")
+           .navigationBarTitle(viewModel.displayedName)
            .onAppear {
                Task {
                    await fetchBookDetail()
                }
            }
        }
+}
+
+extension BookDetailView {
+    var bookDetailSection: some View {
+        Section(header: Text("Book Details").font(.headline)) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Volume: \(viewModel.formattedVolume)").id("volume_item_view")
+                Text("High: \(viewModel.formattedHigh)").id("high_item_view")
+                Text("Change 24h: \(viewModel.formattedChange24)").id("change24_item_view")
+            }
+        }
+        .id("book_detail_section_view")
+    }
+    
+    var tradingInfoSection: some View {
+        Section(header: Text("Trading Information").font(.headline)) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Ask: \(viewModel.formattedAsk)").id("ask_item_view")
+                Text("Bid: \(viewModel.formattedBid)").id("bid_item_view")
+            }
+        }
+        .id("book_detail_trading_view")
+    }
 }
 
 extension BookDetailView {
@@ -56,20 +67,6 @@ extension BookDetailView {
             // TODO: Handle error
             print("Error: \(error)")
         }
-    }
-    
-    func formattedAmount(_ amount: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.locale = Locale.current
-        return numberFormatter.string(from: NSNumber(value: Double(amount) ?? 0)) ?? ""
-    }
-    
-    func formattedCurrency(_ amount: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.locale = Locale.current
-        return numberFormatter.string(from: NSNumber(value: Double(amount) ?? 0)) ?? ""
     }
 }
 

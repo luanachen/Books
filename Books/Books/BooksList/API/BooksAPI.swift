@@ -5,6 +5,7 @@
 //  Created by Luana Chen (Contractor) on 28/02/24.
 //
 
+import BooksNetworking
 import Foundation
 
 enum BooksAPI {

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Books
+@testable import BooksNetworking
 
 class NetworkManagerTests: XCTestCase {
 

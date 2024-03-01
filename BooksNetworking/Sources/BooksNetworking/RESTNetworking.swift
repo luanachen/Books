@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RESTNetworkingProtocol {
+public protocol RESTNetworkingProtocol {
     func request<T: Decodable>(request: APIRequestConfiguration, completion: @escaping (Result<T, Error>) -> Void)
 }
 
@@ -19,7 +19,7 @@ public class NetworkManager: RESTNetworkingProtocol {
         self.session = session
     }
 
-    func request<T: Decodable>(request: APIRequestConfiguration, completion: @escaping (Result<T, Error>) -> Void) {
+    public func request<T: Decodable>(request: APIRequestConfiguration, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = getUrl(request: request) else {
             completion(.failure(NetworkError.invalidURL))
             return

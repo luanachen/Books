@@ -22,8 +22,12 @@ struct BooksListView: View {
                     NavigationLink(destination: BookDetailView(viewModel: .init(book: book.name))) {
                         itemView(book: book)
                     }
+                    .onDisappear {
+                        timer.upstream.connect().cancel()
+                    }
                 }
             }
+            .modifier(ListBackgroundModifier())
             .id("book_list_view")
             .navigationBarTitle("Books")
             .refreshable {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C336BD02B92701C00783B25 /* BooksNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 2C336BCF2B92701C00783B25 /* BooksNetworking */; };
+		2C336BD22B9272E900783B25 /* BooksClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C336BD12B9272E900783B25 /* BooksClientTests.swift */; };
 		2C5CFD9D2B8FC9BD006E1546 /* BooksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFD9C2B8FC9BD006E1546 /* BooksAPI.swift */; };
 		2C5CFD9F2B8FCBBC006E1546 /* BooksClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFD9E2B8FCBBC006E1546 /* BooksClient.swift */; };
 		2C5CFDA12B8FEFA5006E1546 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CFDA02B8FEFA5006E1546 /* BookDetailViewModel.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C336BD12B9272E900783B25 /* BooksClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksClientTests.swift; sourceTree = "<group>"; };
 		2C5CFD9C2B8FC9BD006E1546 /* BooksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAPI.swift; sourceTree = "<group>"; };
 		2C5CFD9E2B8FCBBC006E1546 /* BooksClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksClient.swift; sourceTree = "<group>"; };
 		2C5CFDA02B8FEFA5006E1546 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF656802B921D60009D5544 /* BooksAPITests.swift */,
+				2C336BD12B9272E900783B25 /* BooksClientTests.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				2C5DB0822B8E32EC00327B61 /* BooksListViewTests.swift in Sources */,
 				2C5DB0AE2B8E6B7F00327B61 /* BooksListViewModelTests.swift in Sources */,
 				2CF656812B921D60009D5544 /* BooksAPITests.swift in Sources */,
+				2C336BD22B9272E900783B25 /* BooksClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,30 +17,6 @@ class BookDetailViewModel: ObservableObject {
     @Published var bookDetail: BookDetail.Payload?
     @Published var error: Error?
     
-    var displayedName: String {
-        bookDetail?.displayedName ?? ""
-    }
-    
-    var formattedVolume: String {
-        bookDetail?.formattedVolume ?? ""
-    }
-    
-    var formattedHigh: String {
-        bookDetail?.formattedHigh ?? ""
-    }
-    
-    var formattedChange24: String {
-        bookDetail?.formattedChange24 ?? ""
-    }
-    
-    var formattedAsk: String {
-        bookDetail?.formattedAsk ?? ""
-    }
-    
-    var formattedBid: String {
-        bookDetail?.formattedBid ?? ""
-    }
-    
     private let book: String
     private let env: Environment
     private var cancellables = Set<AnyCancellable>()
@@ -65,5 +41,29 @@ class BookDetailViewModel: ObservableObject {
                 self?.bookDetail = bookDetail
             })
             .store(in: &cancellables)
+    }
+    
+    var displayedName: String {
+        bookDetail?.displayedName ?? ""
+    }
+    
+    var formattedVolume: String {
+        bookDetail?.formattedVolume ?? ""
+    }
+    
+    var formattedHigh: String {
+        bookDetail?.formattedHigh ?? ""
+    }
+    
+    var formattedChange24: String {
+        bookDetail?.formattedChange24 ?? ""
+    }
+    
+    var formattedAsk: String {
+        bookDetail?.formattedAsk ?? ""
+    }
+    
+    var formattedBid: String {
+        bookDetail?.formattedBid ?? ""
     }
 }

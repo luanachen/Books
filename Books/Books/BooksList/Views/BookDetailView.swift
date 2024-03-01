@@ -10,7 +10,9 @@ import SwiftUI
 struct BookDetailView: View {
     
     @ObservedObject var viewModel: BookDetailViewModel
-    @State private var showErrorToast = false
+    @State var showErrorToast = false
+    
+    var didShowError: ((Self) -> Void)?
     
     init(viewModel: BookDetailViewModel) {
         self.viewModel = viewModel
@@ -34,16 +36,13 @@ struct BookDetailView: View {
                }
            }
            .alert(isPresented: $showErrorToast) {
-               Alert(title: Text("Error"),
-                     message: Text("Failed to fetch book list"),
-                     primaryButton: .default(Text("Try Again")) {
-                   Task {
-                       await fetchData()
-                   }
-               }, secondaryButton: .cancel())
+              alert
            }
            .onReceive(viewModel.$error) { error in
-               showErrorToast = error != nil
+               if error != nil {
+                   showErrorToast = true
+                   didShowError?(self)
+               }
            }
        }
 }
@@ -79,6 +78,16 @@ private extension BookDetailView {
             }
         }
         .id("book_detail_trading_view")
+    }
+    
+    var alert: Alert {
+        Alert(title: Text("Error"),
+              message: Text("Failed to fetch book list"),
+              primaryButton: .default(Text("Try Again")) {
+            Task {
+                await fetchData()
+            }
+        }, secondaryButton: .cancel())
     }
 }
 

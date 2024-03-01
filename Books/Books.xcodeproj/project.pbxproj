@@ -32,6 +32,7 @@
 		2C5DB0B62B8E78ED00327B61 /* RESTNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DB0B52B8E78ED00327B61 /* RESTNetworking.swift */; };
 		2C5DB0B82B8E7B5C00327B61 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DB0B72B8E7B5C00327B61 /* NetworkError.swift */; };
 		2C5DB0BA2B8E7B7900327B61 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DB0B92B8E7B7900327B61 /* NetworkSession.swift */; };
+		2CF656812B921D60009D5544 /* BooksAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF656802B921D60009D5544 /* BooksAPITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		2C5DB0B52B8E78ED00327B61 /* RESTNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTNetworking.swift; sourceTree = "<group>"; };
 		2C5DB0B72B8E7B5C00327B61 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2C5DB0B92B8E7B7900327B61 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		2CF656802B921D60009D5544 /* BooksAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		2C5CFD982B8FBC5A006E1546 /* BookList */ = {
 			isa = PBXGroup;
 			children = (
+				2CF6567F2B921D58009D5544 /* API */,
 				2C5DB0AF2B8E6B8400327B61 /* ViewModel */,
 				2C5DB0AC2B8E6B6900327B61 /* Views */,
 			);
@@ -266,6 +269,14 @@
 				2C5DB0B52B8E78ED00327B61 /* RESTNetworking.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		2CF6567F2B921D58009D5544 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2CF656802B921D60009D5544 /* BooksAPITests.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +444,7 @@
 				2C5DB0AB2B8E681D00327B61 /* BookDetailViewTests.swift in Sources */,
 				2C5DB0822B8E32EC00327B61 /* BooksListViewTests.swift in Sources */,
 				2C5DB0AE2B8E6B7F00327B61 /* BooksListViewModelTests.swift in Sources */,
+				2CF656812B921D60009D5544 /* BooksAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

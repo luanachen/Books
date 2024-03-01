@@ -11,7 +11,7 @@ import XCTest
 final class BookDetailViewModelTests: XCTestCase {
     var sut: BookDetailViewModel!
 
-    override func setUp() async throws {
+    override func setUp() {
         sut = BookDetailViewModel(book: "Book", env: .init(client: .mock()))
     }
 

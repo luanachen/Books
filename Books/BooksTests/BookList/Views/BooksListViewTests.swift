@@ -13,9 +13,9 @@ final class BooksListViewTests: XCTestCase {
     var mockViewModel: BooksListViewModel!
     var sut: BooksListView!
 
-    override func setUpWithError() throws {
-        mockViewModel = BooksListViewModel()
-        mockViewModel.books = [Book.mock(), Book.mock(name: "eth_mxn")]
+    override func setUp() {
+        let stubbedBooks = [Book.mock(), Book.mock(name: "eth_mxn")]
+        mockViewModel = BooksListViewModel(env: .init(client: .mock(stubbedBooks: stubbedBooks)))
         sut = BooksListView(viewModel: mockViewModel)
     }
 
@@ -27,7 +27,9 @@ final class BooksListViewTests: XCTestCase {
         XCTAssertNotNil(BooksListView_Previews.previews)
     }
 
-    func testViewHasCorrectSubViews() throws {
+    func testViewHasCorrectSubViews() async throws {
+        await mockViewModel.fetchData()
+        
         let value = try? sut.inspect().find(viewWithId: "book_list_view")
         XCTAssertNotNil(value, "cannot be nil")
         
@@ -46,5 +48,15 @@ final class BooksListViewTests: XCTestCase {
         let value5 = try? sut.inspect().find(viewWithId: "price_range_item_view")
         XCTAssertNotNil(value5, "cannot be nil")
     }
-
+    
+    func testShowAlertViewWhenAPICallFails() {
+        mockViewModel = BooksListViewModel(env: .init(client: .mockFailure()))
+        sut = BooksListView(viewModel: mockViewModel)
+        
+        let exp = sut.on(\.didShowError) { view in
+            XCTAssertTrue(try view.actualView().showErrorToast)
+        }
+        ViewHosting.host(view: sut)
+        wait(for: [exp], timeout: 1)
+    }
 }

@@ -10,8 +10,10 @@ import SwiftUI
 struct BooksListView: View {
 
     @ObservedObject var viewModel = BooksListViewModel()
-    @State private var showErrorToast = false
+    @State var showErrorToast = false
     @State private var timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    
+    var didShowError: ((Self) -> Void)?
     
     var body: some View {
         NavigationView {
@@ -34,11 +36,12 @@ struct BooksListView: View {
             }
         }
         .alert(isPresented: $showErrorToast) {
-            alertView()
+            alertView
         }
         .onReceive(viewModel.$error) { error in
             if error != nil {
                 showErrorToast = true
+                didShowError?(self)
             }
         }
         .onReceive(timer) { _ in
@@ -78,7 +81,7 @@ private extension BooksListView {
         .id("book_item_row_\(book.name)")
     }
     
-    func alertView() -> Alert {
+    var alertView: Alert {
         Alert(title: Text("Error"),
               message: Text("Failed to fetch book list"),
               primaryButton: .default(Text("Try Again")) {

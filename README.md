@@ -5,6 +5,10 @@ It incorporates a networking package for making API requests, which is currently
 
 ![d0d5c517-784e-4d48-b2f2-bebb864cd608](https://github.com/luanachen/Books/assets/24574325/dea444d4-0724-4ae3-87d6-3eb3581ba08c)
 
+Currently, the test coverage is 95,5%:
+
+<img width="1451" alt="Screenshot 2024-03-04 at 13 36 47" src="https://github.com/luanachen/Books/assets/24574325/3551313a-8b61-4907-9be8-e822d461ba54">
+
 
 ## Architecture
 

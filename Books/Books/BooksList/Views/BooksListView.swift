@@ -71,10 +71,10 @@ private extension BooksListView {
         VStack(alignment: .leading) {
             Text(book.displayedName)
                 .font(.headline)
+                .foregroundColor(Color.green)
                 .id("book_name_item_view")
             
             Text("Maximum Price: \(book.formattedMaximumPrice)")
-                .foregroundColor(Color.blue)
                 .id("maximum_price_item_view")
             
             Text("Price Range: \(book.formattedPriceRange)")

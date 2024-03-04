@@ -21,14 +21,11 @@ struct BookDetailView: View {
     var body: some View {
            VStack(alignment: .leading, spacing: 20) {
                bookDetailSection
-               
-               Divider()
-               
+                              
                tradingInfoSection
                
                Spacer()
            }
-           .padding()
            .navigationBarTitle(viewModel.displayedName)
            .onAppear {
                Task {
@@ -60,24 +57,66 @@ private extension BookDetailView {
 
 private extension BookDetailView {
     var bookDetailSection: some View {
-        Section(header: Text("Book Details").font(.headline)) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Volume: \(viewModel.formattedVolume)").id("volume_item_view")
-                Text("High: \(viewModel.formattedHigh)").id("high_item_view")
-                Text("Change 24h: \(viewModel.formattedChange24)").id("change24_item_view")
+        VStack {
+            VStack(alignment: .leading) {
+                Text("Book Details")
+                    .font(.headline)
+                    .font(.system(size: 36))
+                    .padding()
+                VStack(alignment: .leading, spacing: 16) {
+                    itemView(iconName: "chart.bar.fill", title: "Volume", description: viewModel.formattedVolume)
+                    Divider()
+                    itemView(iconName: "chart.line.uptrend.xyaxis", title: "High", description: viewModel.formattedHigh)
+                    Divider()
+                    itemView(iconName: "clock", title: "Change 24h", description: viewModel.formattedChange24)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                Color.gray
+                    .opacity(0.1)
+                    .frame(maxWidth: .infinity, maxHeight: 8)
             }
         }
         .id("book_detail_section_view")
     }
     
     var tradingInfoSection: some View {
-        Section(header: Text("Trading Information").font(.headline)) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Ask: \(viewModel.formattedAsk)").id("ask_item_view")
-                Text("Bid: \(viewModel.formattedBid)").id("bid_item_view")
+        VStack(alignment: .leading) {
+            Text("Trading Information")
+                .font(.headline)
+                .font(.system(size: 24))
+                .padding()
+            VStack(alignment: .leading, spacing: 16) {
+                itemView(iconName: "arrowshape.turn.up.backward.badge.clock", title: "Ask", description: viewModel.formattedAsk)
+                Divider()
+                itemView(iconName: "hammer.fill", title: "Bid", description: viewModel.formattedBid)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
         }
         .id("book_detail_trading_view")
+    }
+    
+    func itemView(iconName: String? = nil, title: String, description: String) -> some View {
+        HStack(spacing: 16) {
+            if let iconName = iconName {
+                Image(systemName: iconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 16, height: 16)
+                    .foregroundColor(.green)
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                
+                Text(description)
+                    .fontWeight(.regular)
+                    .id("price_range_item_view")
+            }
+        }
     }
     
     var alert: Alert {

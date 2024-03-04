@@ -65,10 +65,17 @@ private extension BookDetailView {
                     .padding()
                 VStack(alignment: .leading, spacing: 16) {
                     itemView(iconName: "chart.bar.fill", title: "Volume", description: viewModel.formattedVolume)
+                        .id("volume_item_view")
+                    
                     Divider()
+                    
                     itemView(iconName: "chart.line.uptrend.xyaxis", title: "High", description: viewModel.formattedHigh)
+                        .id("high_item_view")
+                    
                     Divider()
+                    
                     itemView(iconName: "clock", title: "Change 24h", description: viewModel.formattedChange24)
+                        .id("change24_item_view")
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -88,8 +95,12 @@ private extension BookDetailView {
                 .padding()
             VStack(alignment: .leading, spacing: 16) {
                 itemView(iconName: "arrowshape.turn.up.backward.badge.clock", title: "Ask", description: viewModel.formattedAsk)
+                    .id("ask_item_view")
+                
                 Divider()
+                
                 itemView(iconName: "hammer.fill", title: "Bid", description: viewModel.formattedBid)
+                    .id("bid_item_view")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
